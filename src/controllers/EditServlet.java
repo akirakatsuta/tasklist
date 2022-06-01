@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Task;
 import utils.DBUtil;
-
 /**
- * Servlet implementation class EditServlet
- */
+* Servlet implementation class EditServlet
+*/
 @WebServlet("/edit")
 public class EditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -25,7 +24,9 @@ public class EditServlet extends HttpServlet {
      */
     public EditServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
+
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -41,8 +42,11 @@ public class EditServlet extends HttpServlet {
         request.setAttribute("task", m);
         request.setAttribute("_token", request.getSession().getId());
 
+        // メッセージデータが存在しているときのみ
         // メッセージIDをセッションスコープに登録
-        request.getSession().setAttribute("task_id", m.getId());
+        if(m != null) {
+            request.getSession().setAttribute("task_id", m.getId());
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/edit.jsp");
         rd.forward(request, response);
